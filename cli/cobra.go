@@ -64,10 +64,7 @@ func Client(ctx context.Context, apiUrl, userID, password, otp string, http_head
 	timeout, _ := RootCmd.Flags().GetInt("timeout")
 	proxyUrl, _ := RootCmd.Flags().GetString("proxyurl")
 
-	tlsConf := &tls.Config{InsecureSkipVerify: true}
-	if !insecure {
-		tlsConf = nil
-	}
+	tlsConf := &tls.Config{InsecureSkipVerify: insecure}
 	if apiUrl == "" {
 		apiUrl = os.Getenv("PM_API_URL")
 	}

@@ -49,9 +49,6 @@ func loadAppConfig() AppConfig {
 
 func initializeProxmoxClient(ctx context.Context, config AppConfig, insecure bool, proxyURL string, taskTimeout int) (*proxmox.Client, error) {
 	tlsconf := &tls.Config{InsecureSkipVerify: insecure}
-	if !insecure {
-		tlsconf = nil
-	}
 
 	client, err := proxmox.NewClient(config.APIURL, nil, config.HTTPHeaders, tlsconf, proxyURL, taskTimeout)
 	if err != nil {

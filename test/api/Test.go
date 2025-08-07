@@ -28,11 +28,7 @@ func (test *Test) CreateClient() (err error) {
 	if test.Password == "" {
 		test.Password = "root"
 	}
-	tlsConfig := &tls.Config{InsecureSkipVerify: true}
-
-	if test.RequireSSL {
-		tlsConfig = nil
-	}
+	tlsConfig := &tls.Config{InsecureSkipVerify: !test.RequireSSL}
 
 	test._client, err = pxapi.NewClient(test.APIurl, nil, test.HttpHeaders, tlsConfig, "", 300)
 	return err
